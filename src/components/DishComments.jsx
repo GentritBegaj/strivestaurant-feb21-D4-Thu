@@ -2,13 +2,21 @@ import React from "react";
 import { Container, ListGroup, Alert, Badge } from "react-bootstrap";
 
 class DishComments extends React.Component {
+  state = {
+    commentsArray: [],
+  };
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({ commentsArray: this.props.selectedDish.comments });
+    }, 3000);
+  };
   render() {
     return (
       <Container>
         {this.props.selectedDish && (
           <ListGroup className="my-5">
             <h1 className="text-center mb-3">{this.props.selectedDish.name}</h1>
-            {this.props.selectedDish.comments.map((comment, idx) => {
+            {this.state.commentsArray.map((comment, idx) => {
               let variant = "";
 
               switch (comment.rating) {
